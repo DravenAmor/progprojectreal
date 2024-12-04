@@ -1,5 +1,5 @@
 import "~/styles/globals.css";
-
+import UploadThangButton from "./_components/button";
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
@@ -33,6 +33,7 @@ export default function RootLayout({
           <SignInButton />
         </SignedOut>
         <SignedIn>
+          <UploadThangButton/>
           <UserButton />
         </SignedIn>
         {children}

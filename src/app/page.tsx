@@ -1,7 +1,7 @@
 import Link from "next/link";
 //import { db } from "~/server/db";
 
-import { getMyImages } from "~/server/queries"
+import { getMyImages } from "~/server/queries";
 
 
 /*
@@ -27,8 +27,8 @@ export default async function HomePage() {
   return (
     <main className="">
       <div className= "flex flex-wrap gap-4">
-        {images != null && images.map((image, index) => (
-          <div key={image.id} className="w-48 flex-col">
+        { images?.map((image, index) => (
+          <div key={index} className="w-48 flex-col">
             <img src={image.url} />
             <div>{image.name} </div>
             <img className ="" src={image.url} />
