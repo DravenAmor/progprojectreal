@@ -27,12 +27,11 @@ export default async function HomePage() {
   return (
     <main className="">
       <div className= "flex flex-wrap gap-4">
-        { images?.map((image, index) => (
+        {images?.map((image, index) => (
           <div key={index} className="w-48 flex-col">
-            <img src={image.url} />
-            <div>{image.name} </div>
-            <img className ="" src={image.url} />
-      </div>
+            <img className=""src={image.url}/>
+            <div className="">{image.name} </div>
+          </div>
       ))}
       </div>
     </main>

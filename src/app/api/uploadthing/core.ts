@@ -17,14 +17,14 @@ export const ourFileRouter = {
        * For full list of options and defaults, see the File Route API reference
        * @see https://docs.uploadthing.com/file-routes#route-config
        */
-      maxFileSize: "4MB",
-      maxFileCount: 1,
+      maxFileSize: "8MB",
+      maxFileCount: 40,
     },
   })
     // Set permissions and file types for this FileRoute
     .middleware(async ({ req }) => {
       // This code runs on your server before upload
-      const user = await auth();
+      const user = await(auth());
 
       // If you throw, the user will not be able to upload
       if (!user.userId) throw new Error("Unauthorized");
@@ -43,7 +43,7 @@ export const ourFileRouter = {
         url: file.url,
         userId: metadata.userId
       });
-
+      console.log([file.name,file.url,metadata.userId])
       // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
       return { uploadedBy: metadata.userId };
     }),
