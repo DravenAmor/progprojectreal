@@ -1,39 +1,45 @@
-import Link from "next/link";
-//import { db } from "~/server/db";
+'use client';
 
-import { getMyImages } from "~/server/queries";
+import { useState } from 'react';
 
+export default function Home() {
+  const flashcards = [
+    { question: 'Who is the best basketball player of all time?', answer: 'LeBron James' },
+    { question: 'Who was the number 1 pick in the 2003 NBA Draft?', answer: 'LeBron James' },
+    { question: 'Who was NBA MVP in 2008 and 2009?', answer: 'LeBron James' },
+    { question: 'Who better Curry or LeBron?', answer: 'LeBron James' },
+    { question: 'Who beat the Warriors championship streak?', answer: 'LeBron James' },
+    { question: 'Who is the Thanos of the NBA?', answer: 'LeBron James' },
+    { question: 'What NBA player has their own movie?', answer: 'LeBron James' },
+    { question: 'Who the goat of Basketball?', answer: 'LeBron James' },
+    { question: 'Who holds the record for most points in the NBA?', answer: 'LeBron James' },
+    { question: 'Jordan or LeBron?', answer: 'LeBron James' },
+    { question: 'Whos the oldest player in the NBA currently?', answer: 'LeBron James' },
+    { question: 'Who has the most career regular season points in NBA history?', answer: 'LeBron James' },
+  ];
 
-/*
-const mockUrls = [
-  "https://utfs.io/f/06079463-903c-4d25-a12e-1172fbdbd99d-1ody.jpg", 
-  "https://utfs.io/f/5accb5ae-66b7-4f8d-9ba7-445f7aa08ac1-2a.jpg",
-  "https://utfs.io/f/30aa60e5-cf99-4f20-9873-563d36cef6d0-n5yecz.jpg",
-  "https://utfs.io/f/465f90dc-7176-4bf8-8d42-7d8164465b59-m24mvs.jpg",
-  "https://utfs.io/f/Gi1lyvQ5cMToTsHQG1yjsSTz8Btrk3A5PUyO1v4e9hbwICYi"
-];
-
-const mockImages = mockUrls.map((url, index) =>({
-  id: index + 1,
-  url,
-}));
-*/
-
-export default async function HomePage() {
-  const images = await getMyImages().catch((error) => {
-    console.error(error);
-  return null;
-  });
   return (
-    <main className="">
-      <div className= "flex flex-wrap gap-4">
-        {images?.map((image, index) => (
-          <div key={index} className="w-48 flex-col">
-            <img className=""src={image.url}/>
-            <div className="">{image.name} </div>
-          </div>
-      ))}
+    <main className="min-h-screen flex flex-col items-center justify-center bg-black-100 p-6">
+      <h1 className="text-4xl font-bold mb-8">Flashcards of Divine Wisdom</h1>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {flashcards.map((card, index) => (
+          <Flashcard key={index} question={card.question} answer={card.answer} />
+        ))}
       </div>
     </main>
   );
 }
+
+function Flashcard({ question, answer }: { question: string; answer: string }) {
+  const [flipped, setFlipped] = useState(false);
+
+  return (
+    <div
+      onClick={() => setFlipped(!flipped)}
+      className="w-64 h-40 bg-white rounded-lg shadow-md cursor-pointer flex items-center justify-center text-center transition-transform transform hover:scale-105 duration-300"
+    >
+      <p className="text-xlg font-medium px-4">{flipped ? answer : question}</p>
+    </div>
+  );
+}
+
